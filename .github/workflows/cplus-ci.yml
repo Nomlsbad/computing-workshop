@@ -13,19 +13,29 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     strategy:
-      # Set fail-fast to false to ensure that feedback is delivered for all matrix combinations. Consider changing this to true when your workflow is stable.
       fail-fast: false
-
-      # Set up a matrix to run the following 3 configurations:
-      # 1. <Windows, Release, latest MSVC compiler toolchain on the default runner image, default generator>
-      # 2. <Linux, Release, latest GCC compiler toolchain on the default runner image, default generator>
-      # 3. <Linux, Release, latest Clang compiler toolchain on the default runner image, default generator>
-      #
-      # To add more build types (Release, Debug, RelWithDebInfo, etc.) customize the build_type list.
       matrix:
-        os: [ubuntu-latest]
-        build_type: [Release]
-        cpp_compiler: [g++, clang++, cl]
+        config:
+        - {
+            name: "Windows Latest MSVC",
+            os: windows-latest,
+            build_type: "Release", cc: "cl", cxx: "cl",
+          }
+        - {
+            name: "Windows Latest MinGW",
+            os: windows-latest,
+            build_type: "Release", cc: "gcc", cxx: "g++"
+          }
+        - {
+            name: "Ubuntu Latest GCC",
+            os: ubuntu-latest,
+            build_type: "Release", cc: "gcc", cxx: "g++"
+          }
+        - {
+            name: "macOS Latest Clang",
+            os: macos-latest,
+            build_type: "Release", cc: "clang", cxx: "clang++"
+          }
 
     steps:
     - uses: actions/checkout@v3
@@ -39,10 +49,10 @@ jobs:
 
     - name: Install ninja
       run: |
-        if [ "${{ matrix.os }}" == "ubuntu-latest" ]; then
+        if [ "${{ matrix.os }}" == "ubuntu" ]; then
           sudo apt-get update
           sudo apt-get install ninja-build -y
-        elif [ "${{ matrix.os }}" == "windows-latest" ]; then
+        elif [ "${{ matrix.os }}" == "windows" ]; then
           choco install ninja -y
         fi
 
