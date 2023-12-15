@@ -33,7 +33,7 @@ jobs:
           }
         - {
             name: "macOS Latest Clang",
-            os: macos,
+            os: ubuntu,
             build_type: "Release", cc: "clang", cxx: "clang++"
           }
 
@@ -49,10 +49,10 @@ jobs:
 
     - name: Install ninja
       run: |
-        if [ "${{ matrix.os }}" == "ubuntu" ]; then
+        if [ "${{ matrix.config.os }}" == "ubuntu" ]; then
           sudo apt-get update
           sudo apt-get install ninja-build -y
-        elif [ "${{ matrix.os }}" == "windows" ]; then
+        elif [ "${{ matrix.config.os }}" == "windows" ]; then
           choco install ninja -y
         fi
 
