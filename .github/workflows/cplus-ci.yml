@@ -44,18 +44,17 @@ jobs:
       - name: Setup MSVC environment
         if: matrix.config.cc == 'cl'
         run: |
-             choco install visualstudio2019buildtools --package-parameters "--add Microsoft.VisualStudio.Component.VC.Tools.x86.x64"
              cmd.exe \C "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
-             echo "Add 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30133\bin\Hostx64\x64' to PATH"
-             echo "CXX=C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30133\bin\Hostx64\x64\cl.exe" >> $GITHUB_ENV
-             echo "CC=C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30133\bin\Hostx64\x64\cl.exe" >> $GITHUB_ENV
-
+            
       - name: Configure Project
         uses: threeal/cmake-action@v1.3.0
         with:
           generator: Ninja
           c-compiler: ${{ matrix.config.cc }}
           cxx-compiler: ${{ matrix.config.cxx }}
+          env: |
+               CXX=cl.exe
+               CC=cl.exe
 
       - name: Build Project
         run: cmake --build build
