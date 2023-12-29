@@ -41,6 +41,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4.1.1
 
+        - name: Setup MSVC environment
+          if: matrix.config.cc == 'cl'
+          run: |
+               call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+
+
       - name: Configure Project
         uses: threeal/cmake-action@v1.3.0
         with:
