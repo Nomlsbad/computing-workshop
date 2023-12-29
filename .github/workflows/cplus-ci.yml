@@ -19,7 +19,7 @@ jobs:
         - {
             name: "Windows Latest MSVC",
             os: windows-latest,
-            build_type: "Release", cc: "cl", cxx: "cl",
+            build_type: "Release", cc: "cl", cxx: "cl"
           }
         - {
             name: "Windows Latest MinGW",
@@ -41,11 +41,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4.1.1
 
-        - name: Setup MSVC environment
-          if: matrix.config.cc == 'cl'
-          run: |
-               call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
-
+      - name: Setup MSVC environment
+        if: matrix.config.cc == 'cl'
+        run: |
+             call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
 
       - name: Configure Project
         uses: threeal/cmake-action@v1.3.0
