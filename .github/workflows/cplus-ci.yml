@@ -19,22 +19,22 @@ jobs:
         - {
             name: "Windows Latest MSVC",
             os: windows-latest,
-            build_type: "Release", cc: "cl", cxx: "cl"
+            build_type: Release, cc: cl-latest, cxx: cl-latest
           }
         - {
             name: "Windows Latest MinGW",
             os: windows-latest,
-            build_type: "Release", cc: "gcc", cxx: "g++"
+            build_type: Release, cc: gcc-latest, cxx: g++-latest
           }
         - {
             name: "Ubuntu Latest GCC",
             os: ubuntu-latest,
-            build_type: "Release", cc: "gcc", cxx: "g++"
+            build_type: Release, cc: gcc-latest, cxx: g++-latest
           }
         - {
-            name: "Ubuntu Latest Clang",
+            name: Ubuntu Latest Clang,
             os: ubuntu-latest,
-            build_type: "Release", cc: "clang", cxx: "clang++"
+            build_type: Release, cc: clang-latest, cxx: clang++-latest
           }
 
     steps:
@@ -43,8 +43,9 @@ jobs:
 
       - name: Setup MSVC environment
         if: matrix.config.cc == 'cl'
+        shell: bash
         run: |
-             cmd.exe \C "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+             call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
             
       - name: Configure Project
         uses: threeal/cmake-action@v1.3.0
