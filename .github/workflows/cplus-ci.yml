@@ -52,9 +52,6 @@ jobs:
           generator: Ninja
           c-compiler: ${{ matrix.config.cc }}
           cxx-compiler: ${{ matrix.config.cxx }}
-          env: |
-               CXX=cl.exe
-               CC=cl.exe
 
       - name: Build Project
         run: cmake --build build
