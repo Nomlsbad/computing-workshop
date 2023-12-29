@@ -19,7 +19,7 @@ jobs:
         - {
             name: "Windows Latest MSVC",
             os: windows,
-            build_type: "Release", cc: "cl", cxx: "cl",
+            build_type: "Release", cc: "msvc", cxx: "msvc",
           }
         - {
             name: "Windows Latest MinGW",
