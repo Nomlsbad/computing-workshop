@@ -49,7 +49,7 @@ jobs:
           cxx-compiler: ${{ matrix.config.cxx }}
 
       - name: Build Project
-        runs: cmake --build build
+        run: cmake --build build
 
       - name: Test Project
-        runs: ctest --test-dir build
+        run: ctest --test-dir build
