@@ -19,7 +19,7 @@ jobs:
         - {
             name: "Windows Latest MSVC",
             os: windows-latest,
-            build_type: Release, cc: cl-latest, cxx: cl-latest
+            build_type: Release, cc: cl-17, cxx: cl-17
           }
         - {
             name: "Windows Latest MinGW",
@@ -34,7 +34,7 @@ jobs:
         - {
             name: Ubuntu Latest Clang,
             os: ubuntu-latest,
-            build_type: Release, cc: clang-latest, cxx: clang++-latest
+            build_type: Release, cc: clang-17, cxx: clang++-17
           }
 
     steps:
